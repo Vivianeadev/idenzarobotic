@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="pt-BR" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROS-IoT Sentinel | Diagnostic System & Robotics Academy v5.1</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Marcellus&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+
+    <!-- Luxury Particles Background -->
+    <div class="luxury-particles">
+        <div class="luxury-particle"></div><div class="luxury-particle"></div><div class="luxury-particle"></div><div class="luxury-particle"></div><div class="luxury-particle"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo-area">
+                <div class="logo"><i class="fas fa-robot"></i> ROS-IoT Sentinel</div>
+                <div class="logo-tagline">Academy & Diagnostic Engine v5.1</div>
+            </div>
+            <div class="header-status">
+                <div class="status-indicator"><span class="status-dot critical"></span> Sistema: CRÍTICO</div>
+                <div class="status-indicator"><span class="status-dot warning"></span> Visão: OFFLINE</div>
+                <div class="status-indicator"><span class="status-dot critical"></span> Esteira: 2.3 m/s</div>
+            </div>
+            <div class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a onclick="scrollToSection('summary')">Resumo<span class="nav-hint">state</span></a></li>
+                <li><a onclick="scrollToSection('analysis')">Análise<span class="nav-hint">root cause</span></a></li>
+                <li><a onclick="scrollToSection('didatic')">Didática<span class="nav-hint">explicação</span></a></li>
+                <li><a onclick="scrollToSection('actions')">Ação<span class="nav-hint">plano</span></a></li>
+                <li><a onclick="scrollToSection('risk')">Risco<span class="nav-hint">nível</span></a></li>
+                <li><a onclick="scrollToSection('academy')">Academy<span class="nav-hint">aprender</span></a></li>
+                <li><a onclick="scrollToSection('arduino')">Arduino<span class="nav-hint">conectar</span></a></li>
+                <li><a onclick="scrollToSection('portfolio')">Portfólio<span class="nav-hint">projetos</span></a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Dashboard -->
+    <main class="main-content">
+        <div class="dashboard">
+
+            <!-- ============ SYSTEM STATE SUMMARY ============ -->
+            <div class="panel panel-full" id="summary">
+                <div class="panel-header"><i class="fas fa-heartbeat"></i><h2>[1] SYSTEM STATE SUMMARY</h2><span class="badge badge-critical">CRITICAL</span></div>
+                <p class="tiny-hint">Resumo em tempo real da integridade operacional do sistema — nós ROS, sensores IoT e condições de contorno.</p>
+                <div class="state-grid">
+                    <div class="state-card"><div class="value critical">1</div><div class="label">Node Falho</div><p class="tiny-hint">vision_pipeline offline</p><span class="layman-explain">Um programa de visão parou de funcionar</span></div>
+                    <div class="state-card"><div class="value warning">1</div><div class="label">Sensor Degradado</div><p class="tiny-hint">IOT-ENV-001 perda 34%</p><span class="layman-explain">Sensor de temperatura com problemas de comunicação</span></div>
+                    <div class="state-card"><div class="value critical">2.3 m/s</div><div class="label">Velocidade Esteira</div><p class="tiny-hint">limite 1.5 m/s excedido</p><span class="layman-explain">A esteira está correndo rápido demais</span></div>
+                    <div class="state-card"><div class="value">47.2°C</div><div class="label">Temperatura GPU</div><p class="tiny-hint">alerta >45°C</p><span class="layman-explain">O computador de bordo está muito quente</span></div>
+                </div>
+                <div style="margin-top:1rem;padding:.8rem;background:rgba(198,40,40,0.05);border-radius:8px;border-left:4px solid var(--color-critical);">
+                    <strong style="color:var(--color-critical);">🛑 Protective Stop Ativo</strong>
+                    <p class="tiny-hint">UR10e parado por segurança. Safety monitor detectou sobrevelocidade da esteira + ausência de detecção visual de objetos.</p>
+                    <span class="layman-explain">O robô freou sozinho porque detectou perigo: a esteira está rápida e ele está "cego"</span>
+                </div>
+            </div>
+
+            <!-- ============ ROS NODES TABLE ============ -->
+            <div class="panel">
+                <div class="panel-header"><i class="fas fa-cubes"></i><h2>ROS Nodes</h2><span class="badge badge-warning">1 FALHO</span></div>
+                <p class="tiny-hint">Estado atual dos nós do ROS graph. CPU e memória reportados pelo kernel do sistema.</p>
+                <span class="layman-explain">Programas que rodam dentro do robô — cada um cuida de uma tarefa</span>
+                <div class="table-container"><table><thead><tr><th>Node</th><th>Status</th><th>CPU</th><th>MEM</th></tr></thead><tbody>
+                <tr><td>/ur_driver</td><td><span class="status-dot-sm active"></span>ATIVO</td><td>12%</td><td>340MB</td></tr>
+                <tr><td>/gripper_controller</td><td><span class="status-dot-sm active"></span>ATIVO</td><td>3%</td><td>85MB</td></tr>
+                <tr><td>/camera_depth</td><td><span class="status-dot-sm active"></span>ATIVO</td><td>18%</td><td>520MB</td></tr>
+                <tr style="background:rgba(198,40,40,0.04);"><td>/vision_pipeline</td><td><span class="status-dot-sm failed"></span><strong style="color:var(--color-critical);">FALHOU</strong></td><td>0%</td><td>0MB</td></tr>
+                <tr><td>/conveyor_bridge</td><td><span class="status-dot-sm active"></span>ATIVO</td><td>5%</td><td>120MB</td></tr>
+                <tr><td>/safety_monitor</td><td><span class="status-dot-sm active"></span>ATIVO</td><td>2%</td><td>65MB</td></tr>
+                <tr><td>/move_group</td><td><span class="status-dot-sm active"></span>ATIVO</td><td>8%</td><td>410MB</td></tr>
+                <tr><td>/data_logger</td><td><span class="status-dot-sm active"></span>ATIVO</td><td>1%</td><td>45MB</td></tr>
+                </tbody></table></div>
+                <p class="tiny-hint" style="margin-top:4px;color:var(--color-critical);">⚠️ /vision_pipeline: SIGSEGV — 3 restarts falharam (GPU memory)</p>
+                <span class="layman-explain">O programa de visão quebrou 3 vezes seguidas porque o chip gráfico está quente demais</span>
+            </div>
+
+            <!-- ============ IOT TELEMETRY TABLE ============ -->
+            <div class="panel">
+                <div class="panel-header"><i class="fas fa-microchip"></i><h2>IoT Telemetry</h2><span class="badge badge-warning">1 DEGRADADO</span></div>
+                <p class="tiny-hint">Dispositivos IoT conectados via MQTT. Latência e perda de pacotes medidas pelo gateway.</p>
+                <span class="layman-explain">Pequenos sensores espalhados pela máquina que mandam dados sem fio</span>
+                <div class="table-container"><table><thead><tr><th>Dispositivo</th><th>Tipo</th><th>Status</th><th>Último TX</th></tr></thead><tbody>
+                <tr><td>IOT-CONV-001</td><td>Encoder Esteira</td><td><span class="status-dot-sm active"></span>ATIVO</td><td>0.1s</td></tr>
+                <tr><td>IOT-CONV-002</td><td>Sensor Presença</td><td><span class="status-dot-sm active"></span>ATIVO</td><td>0.5s</td></tr>
+                <tr><td>IOT-CONV-003</td><td>Atuador Parada</td><td><span class="status-dot-sm active"></span>ATIVO</td><td>0.3s</td></tr>
+                <tr style="background:rgba(230,81,0,0.04);"><td>IOT-ENV-001</td><td>Temp. GPU</td><td><span class="status-dot-sm degraded"></span><strong style="color:var(--color-warning);">DEGRAD.</strong></td><td>12.4s ⚠️</td></tr>
+                <tr><td>IOT-ENV-002</td><td>Umidade</td><td><span class="status-dot-sm active"></span>ATIVO</td><td>0.6s</td></tr>
+                <tr><td>IOT-GATEWAY-01</td><td>Gateway MQTT</td><td><span class="status-dot-sm active"></span>ATIVO</td><td>0.1s</td></tr>
+                </tbody></table></div>
+                <p class="tiny-hint" style="margin-top:4px;"><span style="color:var(--color-warning);">⚠️ IOT-ENV-001: 34% perda, 12s latência</span><br><span style="color:var(--color-critical);">🔴 IOT-CONV-001: 2.3 m/s</span></p>
+                <span class="layman-explain">O sensor de temperatura está falhando ao enviar dados, e o medidor de velocidade da esteira mostra valor perigoso</span>
+            </div>
+
+            <!-- ============ EVENT STREAM ============ -->
+            <div class="panel panel-full">
+                <div class="panel-header"><i class="fas fa-terminal"></i><h2>Event Stream — Últimos 15 minutos</h2><span class="badge badge-critical">5 ERROS</span></div>
+                <p class="tiny-hint">Logs agregados do sistema. Filtro: nível WARN ou superior. Fonte: /rosout + syslog.</p>
+                <span class="layman-explain">Histórico de tudo que aconteceu — como uma caixa-preta de avião</span>
+                <div style="max-height:300px;overflow-y:auto;">
+<div class="log-entry log-info"><span class="timestamp">14:30:01</span><span class="level">INFO</span><span class="message">System health: ALL NODES OK</span></div>
+<div class="log-entry log-info"><span class="timestamp">14:30:25</span><span class="level">INFO</span><span class="message">Cycle #47 completed</span></div>
+<div class="log-entry log-warn"><span class="timestamp">14:31:48</span><span class="level">WARN</span><span class="message">USB buffer overflow. Frames: 12</span></div>
+<div class="log-entry log-warn"><span class="timestamp">14:32:02</span><span class="level">WARN</span><span class="message">USB buffer overflow. Frames: 28</span></div>
+<div class="log-entry log-error"><span class="timestamp">14:32:17</span><span class="level">ERROR</span><span class="message">SIGSEGV at 0x7f8b2c004000</span></div>
+<div class="log-entry log-error"><span class="timestamp">14:32:19</span><span class="level">ERROR</span><span class="message">Restart #1: GPU memory fail</span></div>
+<div class="log-entry log-error"><span class="timestamp">14:32:23</span><span class="level">ERROR</span><span class="message">Restart #2: GPU memory fail</span></div>
+<div class="log-entry log-error"><span class="timestamp">14:32:27</span><span class="level">ERROR</span><span class="message">Restart #3: GPU memory fail</span></div>
+<div class="log-entry log-warn"><span class="timestamp">14:32:35</span><span class="level">WARN</span><span class="message">Conveyor speed: 2.3 m/s</span></div>
+<div class="log-entry log-error"><span class="timestamp">14:33:10</span><span class="level">ERROR</span><span class="message">PROTECTIVE STOP</span></div>
+                </div>
+            </div>
+
+            <!-- ============ ROOT CAUSE ANALYSIS ============ -->
+            <div class="panel panel-full" id="analysis">
+                <div class="panel-header"><i class="fas fa-search"></i><h2>[2] ROOT CAUSE ANALYSIS</h2><span class="badge badge-warning">TÉRMICA</span></div>
+                <p class="tiny-hint">Correlação entre ROS graph, telemetria IoT e logs para identificação da cadeia causal completa.</p>
+                <span class="layman-explain">Investigação de por que o robô parou — como um detetive seguindo pistas</span>
+                <div class="analysis-section"><h3><i class="fas fa-exclamation-triangle"></i> Causa Raiz Principal</h3>
+                <div class="cause-chain">
+                    <div class="cause-step"><span class="step-label">🌡️ GATILHO</span> IOT-ENV-001: 47.2°C <span class="layman-explain" style="margin-left:auto;">sensor de temperatura detectou calor excessivo</span></div>
+                    <div class="cause-step"><span class="arrow">⬇</span></div>
+                    <div class="cause-step"><span class="step-label">🔥 EFEITO 1</span> GPU superaquece <span class="layman-explain" style="margin-left:auto;">chip gráfico esquenta e para de funcionar direito</span></div>
+                    <div class="cause-step"><span class="arrow">⬇</span></div>
+                    <div class="cause-step"><span class="step-label">📹 EFEITO 2</span> Câmera perde dados <span class="layman-explain" style="margin-left:auto;">a visão do robô fica embaçada e falha</span></div>
+                    <div class="cause-step"><span class="arrow">⬇</span></div>
+                    <div class="cause-step"><span class="step-label">💥 EFEITO 3</span> Programa de visão quebra <span class="layman-explain" style="margin-left:auto;">o software que identifica peças trava</span></div>
+                    <div class="cause-step"><span class="arrow">⬇</span></div>
+                    <div class="cause-step"><span class="step-label">🚫 EFEITO 4</span> 3 tentativas falham <span class="layman-explain" style="margin-left:auto;">sistema tenta religar mas GPU ainda está quente</span></div>
+                    <div class="cause-step"><span class="arrow">⬇</span></div>
+                    <div class="cause-step"><span class="step-label">🛑 RESULTADO</span> Robô fica cego <span class="layman-explain" style="margin-left:auto;">sem visão, não sabe onde estão as peças</span></div>
+                </div></div>
+            </div>
+
+            <!-- ============ DIDATIC ============ -->
+            <div class="panel panel-full" id="didatic">
+                <div class="panel-header"><i class="fas fa-chalkboard-teacher"></i><h2>[3] SYSTEM EXPLANATION — Didática</h2><span class="badge badge-info">HUMANO</span></div>
+                <p class="tiny-hint">Analogia com sentidos humanos para facilitar compreensão do operador.</p>
+                <span class="layman-explain">Pense no robô como uma pessoa trabalhando numa linha de montagem</span>
+                <div class="didatic-grid">
+                    <div class="sense-card failed"><i class="fas fa-eye"></i><h4>👁️ VISÃO</h4><p class="status-text" style="color:var(--color-critical);">❌ CEGO</p><p class="tiny-hint">Câmera "queimou"</p><span class="layman-explain">Os olhos do robô pararam de funcionar por superaquecimento</span></div>
+                    <div class="sense-card warning-sense"><i class="fas fa-ear-listen"></i><h4>👂 AUDIÇÃO</h4><p class="status-text" style="color:var(--color-warning);">⚠️ ATORDOADO</p><p class="tiny-hint">Esteira turbo</p><span class="layman-explain">A esteira está rápida demais — como som muito alto</span></div>
+                    <div class="sense-card ok-sense"><i class="fas fa-hand-paper"></i><h4>✋ TATO</h4><p class="status-text" style="color:var(--color-success);">✅ FUNCIONAL</p><p class="tiny-hint">Gripper OK</p><span class="layman-explain">A mão do robô ainda funciona normalmente</span></div>
+                </div>
+            </div>
+
+            <!-- ============ ACTION PLAN ============ -->
+            <div class="panel panel-full" id="actions">
+                <div class="panel-header"><i class="fas fa-list-ol"></i><h2>[4] RECOMMENDED ACTION PLAN</h2><span class="badge badge-critical">EXECUTAR EM ORDEM</span></div>
+                <p class="tiny-hint">Nenhuma ação é executada automaticamente. Cada passo requer validação humana.</p>
+                <span class="layman-explain">Lista de tarefas para consertar o robô — faça na ordem, como uma receita de bolo</span>
+                <div class="action-step priority-critical"><div class="action-number">1</div><div class="action-content"><h4>🛑 Parar Esteira</h4><p>Serviço /conveyor/stop.</p><span class="action-cmd">rosservice call /conveyor/stop</span><p class="tiny-hint">confirmar 0.0 m/s</p><span class="layman-explain">Desligue a esteira primeiro — é o mais urgente</span></div></div>
+                <div class="action-step priority-high"><div class="action-number">2</div><div class="action-content"><h4>🌡️ Verificar Aquecimento</h4><p>Olhe as ventoinhas do computador de bordo.</p><p class="tiny-hint">superfície >60°C</p><span class="layman-explain">Veja se os coolers estão girando e se há poeira bloqueando</span></div></div>
+                <div class="action-step priority-high"><div class="action-number">3</div><div class="action-content"><h4>⏳ Esperar Esfriar</h4><p>5–10 minutos com ventilação.</p><p class="tiny-hint">IOT-ENV-001 tendência</p><span class="layman-explain">Deixe o computador descansar até a temperatura baixar</span></div></div>
+                <div class="action-step priority-medium"><div class="action-number">4</div><div class="action-content"><h4>🔧 Examinar Esteira</h4><p>Verifique o controlador do motor.</p><p class="tiny-hint">não religar ainda</p><span class="layman-explain">Descubra por que a esteira estava tão rápida antes de ligar de novo</span></div></div>
+            </div>
+
+            <!-- ============ RISK LEVEL ============ -->
+            <div class="panel panel-full" id="risk">
+                <div class="panel-header"><i class="fas fa-shield-haltered"></i><h2>[5] RISK LEVEL</h2><span class="badge badge-critical">ALTO</span></div>
+                <div class="risk-banner critical-risk"><div class="risk-icon"><i class="fas fa-radiation"></i></div><div class="risk-text"><h3>🔴 NÍVEL ALTO</h3><p>Protective stop ativo. GPU com risco de dano permanente.</p></div></div>
+                <span class="layman-explain">Situação perigosa — o computador pode queimar de vez se não esfriar</span>
+            </div>
+
+            <!-- ============ DEPENDENCY DIAGRAM ============ -->
+            <div class="panel panel-full">
+                <div class="panel-header"><i class="fas fa-project-diagram"></i><h2>Diagrama de Propagação de Falha</h2><span class="badge badge-info">CADEIA</span></div>
+                <span class="layman-explain">Mapa mostrando como um problema levou ao outro até o robô parar</span>
+                <div class="dependency-flow">
+                    <div class="dep-node root">🌡️ Sensor de temperatura falhou</div><div class="dep-arrow">⬇</div>
+                    <div class="dep-node root">Computador esquentou demais</div><div class="dep-arrow">⬇</div>
+                    <div class="dep-node" style="background:rgba(230,81,0,0.08);border-color:var(--color-warning);color:var(--color-warning);">Câmera perdeu dados</div><div class="dep-arrow">⬇</div>
+                    <div class="dep-node failed">Visão do robô quebrou</div><div class="dep-arrow">⬇</div>
+                    <div class="dep-row"><div class="dep-node failed">Robô ficou cego</div><div style="color:var(--gold-primary);">+</div><div class="dep-node root">Esteira muito rápida</div></div><div class="dep-arrow">⬇</div>
+                    <div class="dep-node neutral">Sistema de segurança detectou perigo</div><div class="dep-arrow">⬇</div>
+                    <div class="dep-node failed">🛑 Robô parou sozinho</div>
+                </div>
+            </div>
+
+            <!-- ============ ACADEMY ============ -->
+            <div class="panel panel-full" id="academy">
+                <div class="panel-header"><i class="fas fa-graduation-cap"></i><h2>🎓 Robotics Academy — Aprenda ROS & Robótica</h2><span class="badge badge-success">ENSINO</span></div>
+                <p class="tiny-hint">Clique em qualquer card para expandir o conteúdo detalhado. Um robô ensinando você a criar outros robôs.</p>
+                <span class="layman-explain">Escola de robótica — tudo explicado de forma simples para iniciantes</span>
+                <div class="academy-grid">
+                    <div class="academy-card" onclick="toggleEmbed('embed-ros-basics', this)"><i class="fas fa-cogs"></i><h4>ROS Básico</h4><p>Nodes, Topics, Services</p><span class="layman-explain">O sistema operacional do robô — como Windows, mas para máquinas</span></div>
+                    <div class="academy-card" onclick="toggleEmbed('embed-vision', this)"><i class="fas fa-eye"></i><h4>Visão Computacional</h4><p>OpenCV, YOLO, RGB-D</p><span class="layman-explain">Como fazer o robô enxergar usando câmeras</span></div>
+                    <div class="academy-card" onclick="toggleEmbed('embed-iot', this)"><i class="fas fa-network-wired"></i><h4>IoT & MQTT</h4><p>ESP32, gateways, telemetria</p><span class="layman-explain">Pequenos sensores sem fio que conversam entre si</span></div>
+                </div>
+                <div class="embed-panel" id="embed-ros-basics"><span class="breadcrumb" onclick="closeEmbed('embed-ros-basics')">← Voltar</span><h4 style="font-family:'Cinzel',serif;color:var(--color-primary);">📘 ROS Básico — O Sistema Operacional do Robô</h4><p style="font-size:.75rem;">ROS é como o maestro de uma orquestra: cada músico (nó) toca seu instrumento e o maestro coordena. <code>nodes</code> são programinhas, <code>topics</code> são conversas entre eles, <code>services</code> são pedidos pontuais.</p><span class="layman-explain">Pense em ROS como o cérebro do robô — ele decide quem faz o quê e como se comunicam</span></div>
+                <div class="embed-panel" id="embed-vision"><span class="breadcrumb" onclick="closeEmbed('embed-vision')">← Voltar</span><h4 style="font-family:'Cinzel',serif;color:var(--color-primary);">👁️ Visão Computacional</h4><p style="font-size:.75rem;">Use OpenCV + ROS para o robô detectar objetos. A GPU acelera o processamento de imagem — por isso superaqueceu neste diagnóstico.</p><span class="layman-explain">Igual celular que esquenta com muitos apps abertos — o chip gráfico cansa</span></div>
+                <div class="embed-panel" id="embed-iot"><span class="breadcrumb" onclick="closeEmbed('embed-iot')">← Voltar</span><h4 style="font-family:'Cinzel',serif;color:var(--color-primary);">🌐 IoT com MQTT</h4><p style="font-size:.75rem;">Dispositivos pequenos (ESP32) mandam dados via WiFi para um servidor central. Esse servidor repassa ao ROS.</p><span class="layman-explain">Como mensagens de WhatsApp entre sensores — cada um manda sua informação</span></div>
+            </div>
+
+            <!-- ============ ARDUINO GUIDE ============ -->
+            <div class="panel panel-full" id="arduino">
+                <div class="panel-header"><i class="fas fa-plug"></i><h2>🔌 Guia de Conexão — Arduino + ROS + IoT</h2><span class="badge badge-success">HANDS-ON</span></div>
+                <p class="tiny-hint">Clique em qualquer método para expandir o passo a passo completo.</p>
+                <span class="layman-explain">Aprenda a conectar placas Arduino ao robô — como plugar peças de LEGO inteligentes</span>
+                <div class="academy-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                    <div class="academy-card" onclick="toggleEmbed('embed-arduino-rosserial', this)"><i class="fas fa-usb"></i><h4>Via Rosserial (USB)</h4><p>Arduino Uno + ROS no PC</p><span class="layman-explain">Conecte com cabo USB — o jeito mais simples</span></div>
+                    <div class="academy-card" onclick="toggleEmbed('embed-arduino-mqtt', this)"><i class="fas fa-wifi"></i><h4>Via MQTT (WiFi)</h4><p>ESP8266/ESP32 + Broker</p><span class="layman-explain">Conexão sem fio — o sensor manda dados pelo ar</span></div>
+                </div>
+                <div class="embed-panel" id="embed-arduino-rosserial"><span class="breadcrumb" onclick="closeEmbed('embed-arduino-rosserial')">← Voltar</span><h4 style="font-family:'Cinzel',serif;color:var(--color-primary);">Conexão USB — Arduino vira parte do robô</h4><p style="font-size:.75rem;">Instale <code>rosserial</code> no PC, carregue o sketch no Arduino e execute a ponte serial. O Arduino aparece como um nó ROS.</p><span class="layman-explain">É como dar um crachá de funcionário ao Arduino — ele passa a fazer parte da equipe do robô</span></div>
+                <div class="embed-panel" id="embed-arduino-mqtt"><span class="breadcrumb" onclick="closeEmbed('embed-arduino-mqtt')">← Voltar</span><h4 style="font-family:'Cinzel',serif;color:var(--color-primary);">Conexão WiFi — Sensor sem fio</h4><p style="font-size:.75rem;">Use ESP32 com PubSubClient. Publique em tópicos MQTT. O mqtt_bridge traduz para ROS.</p><span class="layman-explain">Como um smartwatch que manda batimentos para o celular — o sensor manda temperatura para o robô</span></div>
+            </div>
+
+            <!-- ============ PORTFÓLIO DE PROJETOS COM ABAS FUNCIONAIS ============ -->
+            <div class="panel panel-full" id="portfolio">
+                <div class="panel-header"><i class="fas fa-briefcase"></i><h2>📁 Portfólio de Projetos — Robótica & IoT</h2><span class="badge badge-info">6 PROJETOS</span></div>
+                <p class="tiny-hint">Cada projeto abre uma aba com explicação completa, lista de materiais, diagrama e passo a passo. Clique nas abas abaixo.</p>
+                <span class="layman-explain">Vitrine de robôs que você pode construir — de fábrica a casa inteligente</span>
+
+                <!-- Tab Navigation -->
+                <div class="tab-nav" id="portfolioTabs">
+                    <button class="tab-btn active" onclick="switchPortfolioTab('tab-cobot')">Braço Cobot</button>
+                    <button class="tab-btn" onclick="switchPortfolioTab('tab-smarthome')">Casa Inteligente</button>
+                    <button class="tab-btn" onclick="switchPortfolioTab('tab-agv')">Carrinho Autônomo</button>
+                    <button class="tab-btn" onclick="switchPortfolioTab('tab-humanoid-port')">Humanoide</button>
+                    <button class="tab-btn" onclick="switchPortfolioTab('tab-thermal')">Monitor Térmico</button>
+                    <button class="tab-btn" onclick="switchPortfolioTab('tab-digitaltwin')">Gêmeo Digital</button>
+                </div>
+
+                <!-- TAB 1: Braço Cobot -->
+                <div class="tab-content active" id="tab-cobot">
+                    <h4 style="font-family:'Cinzel',serif;color:var(--color-primary);margin-bottom:.5rem;"><i class="fas fa-robot"></i> Braço Robótico de Fábrica</h4>
+                    <p style="font-size:.8rem;">Sistema completo de automação industrial: braço robótico que pega peças numa esteira usando câmera e sensores.</p>
+                    <span class="layman-explain">Um braço de robô que trabalha em fábrica — como um operário mecânico que pega e solta objetos</span>
+
+                    <h5 style="font-family:'Cinzel',serif;font-size:.8rem;color:var(--gold-dark);margin-top:1rem;">📋 Lista de Compras</h5>
+                    <table class="bom-table"><thead><tr><th>Peça</th><th>Modelo</th><th>Qtd</th><th>Para que serve</th></tr></thead><tbody>
+                    <tr><td>Braço robô</td><td>UR10e</td><td>1</td><td>O braço que pega as coisas</td></tr>
+                    <tr><td>Câmera 3D</td><td>RealSense D435i</td><td>1</td><td>Olho do robô — vê profundidade</td></tr>
+                    <tr><td>Computador GPU</td><td>Jetson Xavier</td><td>1</td><td>Cérebro que processa imagens</td></tr>
+                    <tr><td>Esteira</td><td>Motor 24V</td><td>1</td><td>Transporta as peças</td></tr>
+                    <tr><td>Sensor presença</td><td>Fotocélula</td><td>1</td><td>Detecta se tem peça na esteira</td></tr>
+                    </tbody></table>
+
+                    <h5 style="font-family:'Cinzel',serif;font-size:.8rem;color:var(--gold-dark);margin-top:1rem;">🔧 Como Construir (Passo a Passo)</h5>
+                    <div class="guide-step"><div class="guide-num">1</div><div class="guide-content"><h5>Monte a estrutura</h5><p>Fixe o braço numa base firme. Posicione a câmera acima da esteira.</p><span class="layman-explain">Parafuse o braço na mesa e aponte a câmera para onde as peças passam</span></div></div>
+                    <div class="guide-step"><div class="guide-num">2</div><div class="guide-content"><h5>Instale os programas</h5><p>Configure o ROS no computador. Instale os drivers do braço e da câmera.</p><span class="layman-explain">Instale os aplicativos que fazem o robô funcionar — como instalar apps no celular</span></div></div>
+                    <div class="guide-step"><div class="guide-num">3</div><div class="guide-content"><h5>Ensine a visão</h5><p>Treine o programa para reconhecer as peças que você usa.</p><span class="layman-explain">Mostre fotos das peças para o robô aprender a identificá-las</span></div></div>
+                    <div class="guide-step"><div class="guide-num">4</div><div class="guide-content"><h5>Conecte os sensores</h5><p>Ligue os sensores de temperatura e presença via WiFi.</p><span class="layman-explain">Conecte os termômetros e olhos mágicos sem fio</span></div></div>
+                    <p class="tiny-hint" style="margin-top:.8rem;">💡 Este é exatamente o sistema que está com problema neste painel! O protective stop aconteceu porque o computador esquentou (passo 2) e a câmera falhou (passo 3).</p>
+                </div>
+
+                <!-- TAB 2: Casa Inteligente -->
+                <div class="tab-content" id="tab-smarthome">
+                    <h4 style="font-family:'Cinzel',serif;color:var(--color-primary);margin-bottom:.5rem;"><i class="fas fa-home"></i> Casa Inteligente com ROS</h4>
+                    <p style="font-size:.8rem;">Automação residencial: sensores de temperatura, umidade e presença controlam luzes e alertas automaticamente.</p>
+                    <span class="layman-explain">Sua casa que age sozinha — acende luz quando você entra, avisa se está muito quente</span>
+
+                    <h5 style="font-family:'Cinzel',serif;font-size:.8rem;color:var(--gold-dark);margin-top:1rem;">📋 Lista de Compras</h5>
+                    <table class="bom-table"><thead><tr><th>Peça</th><th>Modelo</th><th>Qtd</th><th>Para que serve</th></tr></thead><tbody>
+                    <tr><td>Placa WiFi</td><td>ESP32</td><td>4</td><td>Pequeno computador para cada cômodo</td></tr>
+                    <tr><td>Sensor temp/umid</td><td>DHT22</td><td>3</td><td>Mede temperatura e umidade do ar</td></tr>
+                    <tr><td>Relé</td><td>5V 2 canais</td><td>2</td><td>Liga e desliga lâmpadas</td></tr>
+                    <tr><td>Sensor presença</td><td>PIR HC-SR501</td><td>2</td><td>Detecta movimento de pessoas</td></tr>
+                    </tbody></table>
+
+                    <h5 style="font-family:'Cinzel',serif;font-size:.8rem;color:var(--gold-dark);margin-top:1rem;">🔧 Como Construir</h5>
+                    <div class="guide-step"><div class="guide-num">1</div><div class="guide-content"><h5>Prepare os ESP32</h5><p>Carregue o programa WiFi+MQTT em cada placa. Cada uma manda dados do seu cômodo.</p><span class="layman-explain">Coloque uma placazinha em cada quarto — elas mandam informações pelo ar</span></div></div>
+                    <div class="guide-step"><div class="guide-num">2</div><div class="guide-content"><h5>Servidor central</h5><p>Instale o Mosquitto no PC. Ele recebe todos os dados dos sensores.</p><span class="layman-explain">Um programa que funciona como central de mensagens — tipo um e-mail dos sensores</span></div></div>
+                    <div class="guide-step"><div class="guide-num">3</div><div class="guide-content"><h5>Crie as regras</h5><p>Programe: "se tiver alguém no quarto e estiver escuro, acenda a luz".</p><span class="layman-explain">Ensine a casa a reagir: movimento detectado + escuro = luz acesa</span></div></div>
+                </div>
+
+                <!-- TAB 3: AGV -->
+                <div class="tab-content" id="tab-agv">
+                    <h4 style="font-family:'Cinzel',serif;color:var(--color-primary);margin-bottom:.5rem;"><i class="fas fa-car"></i> Carrinho Robô Autônomo</h4>
+                    <p style="font-size:.8rem;">Veículo que navega sozinho usando um scanner laser 360° para mapear o ambiente e desviar de obstáculos.</p>
+                    <span class="layman-explain">Um carrinho que anda sozinho — como um aspirador robô, mas maior e mais inteligente</span>
+
+                    <h5 style="font-family:'Cinzel',serif;font-size:.8rem;color:var(--gold-dark);margin-top:1rem;">📋 Lista de Compras</h5>
+                    <table class="bom-table"><thead><tr><th>Peça</th><th>Modelo</th><th>Qtd</th><th>Para que serve</th></tr></thead><tbody>
+                    <tr><td>Scanner laser</td><td>RPLidar A1</td><td>1</td><td>Olho 360° que vê obstáculos</td></tr>
+                    <tr><td>Motores</td><td>12V com encoder</td><td>2</td><td>Rodas motorizadas</td></tr>
+                    <tr><td>Cérebro</td><td>Raspberry Pi 4</td><td>1</td><td>Computador de bordo</td></tr>
+                    <tr><td>Arduino Mega</td><td>2560</td><td>1</td><td>Controla os motores</td></tr>
+                    </tbody></table>
+
+                    <h5 style="font-family:'Cinzel',serif;font-size:.8rem;color:var(--gold-dark);margin-top:1rem;">🔧 Como Construir</h5>
+                    <div class="guide-step"><div class="guide-num">1</div><div class="guide-content"><h5>Monte o chassi</h5><p>2 rodas com motor + 1 rodinha solta. Fixe o laser no topo.</p><span class="layman-explain">Igual carrinho de controle remoto, mas com um sensor que gira vendo tudo ao redor</span></div></div>
+                    <div class="guide-step"><div class="guide-num">2</div><div class="guide-content"><h5>Instale o ROS</h5><p>No Raspberry Pi, instale o sistema de navegação do ROS.</p><span class="layman-explain">Coloque o "aplicativo de mapa" no computador do carrinho</span></div></div>
+                    <div class="guide-step"><div class="guide-num">3</div><div class="guide-content"><h5>Mapeie o ambiente</h5><p>Ligue o laser e dirija manualmente uma vez. O carrinho cria o mapa.</p><span class="layman-explain">Passeie com o carrinho pelo local — ele desenha a planta baixa sozinho</span></div></div>
+                </div>
+
+                <!-- TAB 4: Humanoide -->
+                <div class="tab-content" id="tab-humanoid-port">
+                    <h4 style="font-family:'Cinzel',serif;color:var(--color-primary);margin-bottom:.5rem;"><i class="fas fa-user-astronaut"></i> Robô Humanoide de Brinquedo</h4>
+                    <p style="font-size:.8rem;">Robô de 30cm com pernas e braços que anda sozinho. Controlado por Arduino e conectado ao computador.</p>
+                    <span class="layman-explain">Um robô que parece gente pequena — anda, mexe os braços e pode ser controlado por controle remoto</span>
+
+                    <h5 style="font-family:'Cinzel',serif;font-size:.8rem;color:var(--gold-dark);margin-top:1rem;">📋 Lista de Compras</h5>
+                    <table class="bom-table"><thead><tr><th>Peça</th><th>Modelo</th><th>Qtd</th><th>Para que serve</th></tr></thead><tbody>
+                    <tr><td>Servomotores</td><td>MG996R</td><td>6</td><td>Músculos do robô</td></tr>
+                    <tr><td>Arduino Mega</td><td>2560</td><td>1</td><td>Cérebro do robô</td></tr>
+                    <tr><td>Bateria</td><td>LiPo 7.4V</td><td>1</td><td>Energia para andar</td></tr>
+                    <tr><td>Corpo</td><td>Impresso 3D</td><td>1</td><td>Estrutura de plástico</td></tr>
+                    </tbody></table>
+
+                    <h5 style="font-family:'Cinzel',serif;font-size:.8rem;color:var(--gold-dark);margin-top:1rem;">🔧 Como Construir</h5>
+                    <div class="guide-step"><div class="guide-num">1</div><div class="guide-content"><h5>Imprima o corpo</h5><p>Baixe moldes 3D gratuitos. Imprima pernas, braços e tronco em plástico PLA.</p><span class="layman-explain">Use impressora 3D para fazer as peças do robô — como imprimir um boneco articulado</span></div></div>
+                    <div class="guide-step"><div class="guide-num">2</div><div class="guide-content"><h5>Coloque os motores</h5><p>2 motores em cada perna (quadril e joelho). 1 em cada braço (ombro).</p><span class="layman-explain">Os motores são as juntas — quanto mais motores, mais movimentos o robô faz</span></div></div>
+                    <div class="guide-step"><div class="guide-num">3</div><div class="guide-content"><h5>Ensine a andar</h5><p>Programe a sequência de passos: levanta perna direita, inclina, abaixa, repete com esquerda.</p><span class="layman-explain">É como coreografia de dança — o robô repete os mesmos movimentos para andar</span></div></div>
+                </div>
+
+                <!-- TAB 5: Monitor Térmico -->
+                <div class="tab-content" id="tab-thermal">
+                    <h4 style="font-family:'Cinzel',serif;color:var(--color-primary);margin-bottom:.5rem;"><i class="fas fa-temperature-high"></i> Rede de Termômetros Inteligentes</h4>
+                    <p style="font-size:.8rem;">Vários sensores de temperatura espalhados pela fábrica que avisam quando algo está esquentando demais.</p>
+                    <span class="layman-explain">Como termômetros de febre espalhados pelas máquinas — avisam antes de queimar</span>
+
+                    <h5 style="font-family:'Cinzel',serif;font-size:.8rem;color:var(--gold-dark);margin-top:1rem;">📋 Lista de Compras</h5>
+                    <table class="bom-table"><thead><tr><th>Peça</th><th>Modelo</th><th>Qtd</th><th>Para que serve</th></tr></thead><tbody>
+                    <tr><td>Sensor temp</td><td>LM35</td><td>8</td><td>Mede temperatura com precisão</td></tr>
+                    <tr><td>Placa WiFi</td><td>ESP32</td><td>4</td><td>Manda dados sem fio</td></tr>
+                    <tr><td>Servidor</td><td>Mosquitto</td><td>1</td><td>Central que recebe os dados</td></tr>
+                    </tbody></table>
+
+                    <h5 style="font-family:'Cinzel',serif;font-size:.8rem;color:var(--gold-dark);margin-top:1rem;">🔧 Como Construir</h5>
+                    <div class="guide-step"><div class="guide-num">1</div><div class="guide-content"><h5>Conecte os sensores</h5><p>Cada LM35 tem 3 pinos: ligue no 3.3V, GND e entrada analógica do ESP32.</p><span class="layman-explain">Igual plugar fone de ouvido — cada sensor encaixa em 3 furinhos</span></div></div>
+                    <div class="guide-step"><div class="guide-num">2</div><div class="guide-content"><h5>Configure os alertas</h5><p>Programe: se temperatura passar de 45°C, mande mensagem de aviso.</p><span class="layman-explain">O sistema grita "está quente!" antes de queimar — como alarme de carro</span></div></div>
+                </div>
+
+                <!-- TAB 6: Gêmeo Digital -->
+                <div class="tab-content" id="tab-digitaltwin">
+                    <h4 style="font-family:'Cinzel',serif;color:var(--color-primary);margin-bottom:.5rem;"><i class="fas fa-vr-cardboard"></i> Gêmeo Digital — Cópia Virtual do Robô</h4>
+                    <p style="font-size:.8rem;">Simulação 3D do robô no computador que copia tudo que o robô real faz. Permite testar programas sem risco.</p>
+                    <span class="layman-explain">Um robô de mentirinha no computador — você testa tudo nele antes de mandar o robô de verdade fazer</span>
+
+                    <h5 style="font-family:'Cinzel',serif;font-size:.8rem;color:var(--gold-dark);margin-top:1rem;">📋 Programas Necessários</h5>
+                    <table class="bom-table"><thead><tr><th>Programa</th><th>Versão</th><th>Para que serve</th></tr></thead><tbody>
+                    <tr><td>Gazebo</td><td>11</td><td>Mundo 3D com física real</td></tr>
+                    <tr><td>RViz</td><td>1.14</td><td>Visualizar dados do robô</td></tr>
+                    <tr><td>MoveIt</td><td>1.1</td><td>Planejar movimentos</td></tr>
+                    </tbody></table>
+
+                    <h5 style="font-family:'Cinzel',serif;font-size:.8rem;color:var(--gold-dark);margin-top:1rem;">🔧 Como Fazer</h5>
+                    <div class="guide-step"><div class="guide-num">1</div><div class="guide-content"><h5>Crie o modelo 3D</h5><p>Desenhe o robô em arquivo URDF (tipo XML). Defina tamanho, peso e juntas.</p><span class="layman-explain">Desenhe o robô no computador como se fosse um boneco de massinha virtual</span></div></div>
+                    <div class="guide-step"><div class="guide-num">2</div><div class="guide-content"><h5>Simule no Gazebo</h5><p>Coloque o modelo num mundo 3D com gravidade. O robô virtual se move igual ao real.</p><span class="layman-explain">É como jogar The Sims com robôs — tudo que acontece na simulação é realista</span></div></div>
+                    <div class="guide-step"><div class="guide-num">3</div><div class="guide-content"><h5>Conecte ao robô real</h5><p>O MoveIt planeja no virtual e envia comandos ao físico. Teste antes de executar.</p><span class="layman-explain">Ensaiar no boneco antes de mandar o robô de verdade se mexer — segurança total</span></div></div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer-main">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4><i class="fas fa-book"></i> Manual do Usuário</h4>
+                <ul>
+                    <li><strong>Navegação:</strong> Use o menu superior para saltar entre seções.</li>
+                    <li><strong>Estado:</strong> Painel [1] exibe resumo. Cores: vermelho=crítico, laranja=alerta.</li>
+                    <li><strong>Logs:</strong> ERROR (crítico), WARN (atenção), INFO (informativo).</li>
+                    <li><strong>Plano de Ação:</strong> Passos numerados em [4] — siga em ordem.</li>
+                    <li><strong>Academy:</strong> Seção [Academy] ensina ROS e robótica.</li>
+                    <li><strong>Arduino:</strong> Guia prático para conectar Arduino ao ecossistema.</li>
+                    <li><strong>Portfólio:</strong> Projetos completos com BOM e passo a passo.</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4><i class="fas fa-gavel"></i> Compliance & Legal</h4>
+                <ul>
+                    <li><strong>Ferramenta Diagnóstica:</strong> NÃO é sistema de controle.</li>
+                    <li><strong>Nenhuma Ação Automática:</strong> Toda ação requer intervenção humana.</li>
+                    <li><strong>Safety:</strong> Protective stop governado por ISO 13849-1 PLd.</li>
+                    <li><strong>Dados:</strong> Refletem estado no momento da última atualização.</li>
+                    <li><strong>Conformidade:</strong> IEC 61508 (SIL 2), ISO 10218-1, ROS-Industrial.</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4><i class="fas fa-building"></i> Desenvolvedor</h4>
+                <ul>
+                    <li><strong>Empresa:</strong> Nexus Robotics Intelligence S.A.</li>
+                    <li><strong>CNPJ:</strong> 47.891.236/0001-09</li>
+                    <li><strong>Produto:</strong> ROS-IoT Sentinel™ v5.1</li>
+                    <li><strong>Licença:</strong> Proprietária — Uso interno</li>
+                    <li><strong>Contato:</strong> compliance@nexus-robotics.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-disclaimer">
+            <div class="legal-title">ISENÇÃO DE RESPONSABILIDADE</div>
+            <p>Este software é fornecido "como está", sem garantias de qualquer tipo, expressas ou implícitas. A Nexus Robotics Intelligence S.A. não se responsabiliza por danos diretos, indiretos, incidentais ou consequenciais resultantes do uso ou incapacidade de uso deste sistema.</p>
+            <p>As sugestões e planos de ação exibidos são recomendações geradas por inteligência artificial com base nos dados disponíveis. O operador humano é o único responsável por validar e executar qualquer ação no sistema físico.</p>
+            <p>© 2026 Nexus Robotics Intelligence S.A. Todos os direitos reservados. ROS® é marca registrada da Open Source Robotics Foundation.</p>
+        </div>
+        <div class="footer-copyright">Build v5.1.0 — Nexus Robotics Intelligence — Compliance Tag: NR-COMP-2026-001</div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('hamburger').classList.toggle('active');
+            document.getElementById('navMenu').classList.toggle('active');
+        }
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+            document.getElementById('hamburger').classList.remove('active');
+            document.getElementById('navMenu').classList.remove('active');
+        }
+        function toggleEmbed(embedId, cardElement) {
+            const embed = document.getElementById(embedId);
+            const allEmbeds = document.querySelectorAll('.embed-panel');
+            const parentPanel = cardElement.closest('.panel');
+            const siblingEmbeds = parentPanel.querySelectorAll('.embed-panel');
+            siblingEmbeds.forEach(e => {
+                if (e.id !== embedId) e.classList.remove('active');
+            });
+            embed.classList.toggle('active');
+            if (embed.classList.contains('active')) {
+                embed.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+        function closeEmbed(embedId) {
+            const embed = document.getElementById(embedId);
+            embed.classList.remove('active');
+        }
+        function switchPortfolioTab(tabId) {
+            const allTabs = document.querySelectorAll('#portfolioTabs .tab-btn');
+            allTabs.forEach(btn => btn.classList.remove('active'));
+            const clickedBtn = document.querySelector(`#portfolioTabs .tab-btn[onclick*="${tabId}"]`);
+            if (clickedBtn) clickedBtn.classList.add('active');
+            const allContents = document.querySelectorAll('#portfolio .tab-content');
+            allContents.forEach(content => content.classList.remove('active'));
+            const selected = document.getElementById(tabId);
+            if (selected) {
+                selected.classList.add('active');
+                selected.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+    </script>
+</body>
+</html>
